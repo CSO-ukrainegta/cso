@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Новини та оголошення</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap" rel="stylesheet">
+  <link rel="icon" href="cso.png" type="png">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Oswald', sans-serif;
+      background: url('back.jpg') repeat;
+      background-size: cover;
+      color: #fff;
+    }
+
+    @keyframes bgMove {
+      0% { background-position: 0 0; }
+      100% { background-position: 1000px 1000px; }
+    }
+
+    header {
+      background-color: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      padding: 20px 40px;
+      font-size: 26px;
+      font-weight: bold;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header a {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    header a img {
+      height: 48px;
+    }
+
+    .search-box {
+      margin: 20px auto;
+      text-align: center;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      width: 60%;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    .news-list {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .news-item {
+      margin-bottom: 20px;
+      border-bottom: 1px solid #888;
+      padding-bottom: 10px;
+    }
+
+    .news-item:last-child {
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+  	<a href="index.html">
+      <img src="cso.png" alt="Емблема">
+      </a>
+      Новини та оголошення    
+  </header>
+
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Пошук по новинах..." onkeyup="searchNews()">
+  </div>
+
+  <div class="news-list" id="newsList">
+    <div class="news-item">
+      28.04.2025  На посаду керівника ЦСО "А" призначено Полковника СБУ Сергія Астро.
+    </div>
+  </div>
+
+  <script>
+    function searchNews() {
+      const input = document.getElementById("searchInput").value.toLowerCase();
+      const news = document.querySelectorAll(".news-item");
+      news.forEach(item => {
+        item.style.display = item.textContent.toLowerCase().includes(input) ? "block" : "none";
+      });
+    }
+  </script>
+</body>
+</html>

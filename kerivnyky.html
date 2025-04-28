@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Керівний склад | ЦСО "А" СБУ К</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&family=Roboto&display=swap" rel="stylesheet">
+  <link rel="icon" href="cso.png" type="png">
+  <style>
+    :root {
+      --text-color: #f1f1f1;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-border: rgba(255, 255, 255, 0.15);
+    }
+
+    body.light {
+      --text-color: #111;
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --card-border: rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Oswald', sans-serif;
+      background: url('back.jpg') repeat;
+      background-size: cover;
+      color: #fff;
+    }
+
+    @keyframes bgMove {
+      0% { background-position: 0 0; }
+      100% { background-position: 1000px 1000px; }
+    }
+
+    header {
+      background-color: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      padding: 20px 40px;
+      font-size: 26px;
+      font-weight: bold;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header a {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    header a img {
+      height: 48px;
+    }
+
+    .theme-toggle {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: 1px solid #ccc;
+      color: var(--text-color);
+      padding: 6px 12px;
+      cursor: pointer;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .search-container {
+      text-align: center;
+      margin: 30px 20px;
+    }
+
+    .search-container input {
+      padding: 10px;
+      width: 300px;
+      max-width: 90%;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      padding: 20px 40px 60px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .card {
+      background: none;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 380px;
+      text-align: center;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+    }
+
+    .card.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      padding: 20px;
+      backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card-front img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
+
+    .card-front h2 {
+      margin: 0;
+      font-family: 'Oswald', sans-serif;
+      font-size: 22px;
+    }
+
+    .card-front p {
+      margin: 5px 0;
+    }
+
+    .card-back {
+      transform: rotateY(180deg);
+    }
+
+    .card-back p {
+      margin: 10px 0;
+    }
+
+    .social {
+      display: flex;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .social a {
+      width: 24px;
+      height: 24px;
+      fill: var(--text-color);
+      transition: fill 0.3s;
+    }
+
+    .social a:hover {
+      fill: #4eaaff;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        font-size: 18px;
+        padding: 15px;
+      }
+
+      .container {
+        padding: 20px;
+        gap: 20px;
+      }
+
+      header a img {
+        height: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html">
+      <img src="cso.png" alt="Емблема">
+    </a>
+    Керівний склад ЦСО "А" СБУ К
+  </header>
+
+  <div class="search-container">
+    <input type="text" id="search" placeholder="Пошук за ім’ям або посадою..." onkeyup="searchCards()">
+  </div>
+
+  <div class="container" id="cards-container">
+    <div class="card" onclick="this.classList.toggle('flipped')">
+      <div class="card-inner">
+        <div class="card-front">
+          <h2>Сергій Астро</h2>
+          <p>Керівник підрозділу</p>
+        </div>
+        <div class="card-back">
+          <p>Discord: fuirovich_81398</p>
+          <div class="social">
+            <a href="#" title="Телефон">
+              <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.11-.21c1.2.48 2.53.73 3.88.73a1 1 0 0 1 1 1v3.5a1 1 0 0 1-1 1C10.34 22 2 13.66 2 3.5a1 1 0 0 1 1-1H6.5a1 1 0 0 1 1 1c0 1.35.25 2.68.73 3.88a1 1 0 0 1-.21 1.11l-2.2 2.2z"/></svg>
+            </a>
+            <a href="#" title="Email">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12a2 2 0 0 1-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm8 7L4.5 6.5h15L12 11z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Друга картка -->
+    <div class="card" onclick="this.classList.toggle('flipped')">
+      <div class="card-inner">
+        <div class="card-front">
+          <h2>Вакантно</h2>
+          <p>Заступник керівника</p>
+        </div>
+        <div class="card-back">
+          <p>Discord: -</p>
+          <div class="social">
+            <a href="#" title="Телефон">
+              <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.11-.21c1.2.48 2.53.73 3.88.73a1 1 0 0 1 1 1v3.5a1 1 0 0 1-1 1C10.34 22 2 13.66 2 3.5a1 1 0 0 1 1-1H6.5a1 1 0 0 1 1 1c0 1.35.25 2.68.73 3.88a1 1 0 0 1-.21 1.11l-2.2 2.2z"/></svg>
+            </a>
+            <a href="#" title="Email">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12a2 2 0 0 1-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm8 7L4.5 6.5h15L12 11z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('light');
+    }
+
+    function searchCards() {
+      const input = document.getElementById("search").value.toLowerCase();
+      const cards = document.querySelectorAll(".card");
+
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        card.style.display = text.includes(input) ? "block" : "none";
+      });
+    }
+  </script>
+</body>
+</html>

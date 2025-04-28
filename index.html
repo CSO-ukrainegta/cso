@@ -1,0 +1,123 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Головна | ЦСО "А" СБУ К</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap" rel="stylesheet">
+  <link rel="icon" href="cso.png" type="png">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Oswald', sans-serif;
+      background: url('back.jpg') no-repeat center center fixed;
+      background-size: cover;
+      overflow: hidden;
+      color: white;
+    }
+    .emblem {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1);
+      width: 180px;
+      transition: transform 1s ease-in-out, top 1s, left 1s;
+      z-index: 10;
+    }
+    .emblem.move-to-center-top {
+      top: 15%;
+      left: 50%;
+      transform: translateX(-50%) scale(1.2);
+    }
+    .container {
+      position: absolute;
+      top: 60%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+    .container.visible {
+      opacity: 1;
+    }
+    .btn {
+      background: rgba(255,255,255,0.1);
+      border: 2px solid #ccc;
+      color: white;
+      padding: 15px 30px;
+      margin: 15px;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .btn:hover {
+      background: #1e90ff;
+      transform: scale(1.05);
+    }
+    .loader-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #0b0e11;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      transition: opacity 1s ease;
+    }
+    .loader-screen.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="loader-screen" id="loader">
+    <img src="cso.png" id="loader-emblem" class="emblem">
+  </div>
+
+  <img src="cso.png" id="emblem" class="emblem" style="display: none;">
+
+  <div class="container" id="main-buttons">
+    <button class="btn" onclick="animateAndRedirect('kerivnyky.html')">Керівний склад</button>
+    <button class="btn" onclick="animateAndRedirect('news.html')">Новини та оголошення</button>
+    <button class="btn" onclick="animateAndRedirect('rek.html')">Рекрутинг</button>
+    <button class="btn" onclick="animateAndRedirect('tac.html')">Тактики</button>
+    <button class="btn" onclick="animateAndRedirect('pp.html')">Про підрозділ</button>
+  </div>
+
+  <script>
+    window.addEventListener('load', () => {
+      const loader = document.getElementById('loader');
+      const loaderEmblem = document.getElementById('loader-emblem');
+      const emblem = document.getElementById('emblem');
+      const buttons = document.getElementById('main-buttons');
+
+      setTimeout(() => {
+        loader.classList.add('hidden');
+        emblem.style.display = 'block';
+        setTimeout(() => {
+          emblem.classList.add('move-to-center-top');
+          buttons.classList.add('visible');
+        }, 100);
+      }, 1000);
+    });
+
+    function animateAndRedirect(url) {
+      const emblem = document.getElementById('emblem');
+      emblem.classList.remove('move-to-center-top');
+      emblem.style.top = '50%';
+      emblem.style.left = '50%';
+      emblem.style.transform = 'translate(-50%, -50%) scale(1)';
+      document.getElementById('main-buttons').classList.remove('visible');
+      setTimeout(() => {
+        window.location.href = url;
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
